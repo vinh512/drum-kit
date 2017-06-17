@@ -77,6 +77,20 @@
 
     key.classList.add('playing')
   });
+
+  // ignores other transitions aside from 'transform' and removes the 'playing' class
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; //skip if not a transform transition
+    this.classList.remove('playing');
+  }
+
+  // grabs all elements with key class which is an array
+  const keys = document.querySelectorAll('.key');
+
+  // the transitionend event occurs when a CSS transition has completed
+  // each key gets an eventListener added to it (which is 'transitionend') and when the transition is ending, it will be removed
+  keys.forEach(key => { key.addEventListener('transitionend', removeTransition)})
+
 </script>
 
 
